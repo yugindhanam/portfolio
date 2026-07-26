@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import { FaDownload } from 'react-icons/fa'
+import { FaDownload, FaUserGraduate, FaCode } from 'react-icons/fa'
 import { personalInfo } from '@/lib/data'
 
 function AnimatedNumber({ target }) {
@@ -25,44 +25,52 @@ function AnimatedNumber({ target }) {
   return <span ref={ref}>{count}</span>
 }
 
-const techStack = ['Java', 'Python', 'JavaScript', 'React', 'Next.js', 'Node.js', 'SQL', 'Git']
+const techStack = ['Python', 'JavaScript', 'Java', 'React.js', 'Next.js 14', 'Tailwind CSS', 'Unity', 'LiveKit AI', 'Git']
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-8">
+    <section id="about" className="py-28 px-6 md:px-8 relative">
       <div className="max-w-5xl mx-auto">
 
         {/* Section header */}
         <motion.div className="text-center mb-16" initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
-          <span className="inline-block text-[0.8rem] font-semibold tracking-[2px] uppercase text-indigo-400 px-4 py-1.5 rounded-full mb-4"
-            style={{ border: '1px solid rgba(99,102,241,0.3)', background: 'rgba(99,102,241,0.07)' }}>
-            Who I Am
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-indigo-400 px-4 py-1.5 rounded-full mb-3 bg-indigo-500/10 border border-indigo-500/30">
+            <FaUserGraduate className="text-indigo-400" /> Professional Profile
           </span>
-          <h2 className="font-heading font-extrabold text-gradient-about" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>About Me</h2>
+          <h2 className="font-heading font-extrabold text-gradient-about tracking-tight" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.2rem)' }}>
+            About Me
+          </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-[1.4fr_1fr] gap-12 items-start">
+        <div className="grid md:grid-cols-[1.4fr_1fr] gap-10 items-start">
 
           {/* Text side */}
           <motion.div className="flex flex-col gap-8" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.1 }} viewport={{ once: true }}>
-            <p className="text-slate-400 text-[1.05rem] leading-[1.8]">{personalInfo.bio}</p>
+            <div className="p-6 md:p-8 rounded-2xl bg-slate-900/60 border border-slate-800 backdrop-blur-xl shadow-pro-card relative overflow-hidden">
+              <p className="text-slate-300 text-[1.05rem] leading-[1.8] font-normal">{personalInfo.bio}</p>
+            </div>
 
             {/* Tech chips */}
-            <div className="flex flex-wrap gap-2.5">
-              {techStack.map((tech, i) => (
-                <motion.span
-                  key={i}
-                  className="px-4 py-1.5 rounded-full text-[0.82rem] font-medium text-indigo-300 cursor-default transition-all duration-300 hover:-translate-y-0.5 hover:text-slate-200 hover:bg-indigo-500/20 hover:border-indigo-500 tech-chip"
-                  style={{ border: '1px solid rgba(99,102,241,0.3)', background: 'rgba(99,102,241,0.08)' }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.07 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -3 }}
-                >
-                  {tech}
-                </motion.span>
-              ))}
+            <div>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-indigo-400 mb-3 flex items-center gap-2">
+                <FaCode /> Core Technologies &amp; Tools
+              </h4>
+              <div className="flex flex-wrap gap-2.5">
+                {techStack.map((tech, i) => (
+                  <motion.span
+                    key={i}
+                    className="px-4 py-1.5 rounded-full text-xs font-medium text-indigo-300 cursor-default transition-all duration-300 hover:scale-105 hover:text-white hover:border-indigo-400 hover:bg-indigo-500/20"
+                    style={{ border: '1px solid rgba(99,102,241,0.25)', background: 'rgba(99,102,241,0.08)' }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.05 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -2 }}
+                  >
+                    {tech}
+                  </motion.span>
+                ))}
+              </div>
             </div>
 
             <a
@@ -70,10 +78,10 @@ export default function About() {
               download="Yugin_Santhosh_K_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full text-sm font-semibold text-white no-underline w-fit transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(99,102,241,0.5)]"
-              style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', boxShadow: '0 4px 20px rgba(99,102,241,0.35)' }}
+              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-sm font-semibold text-white no-underline w-fit transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(99,102,241,0.5)]"
+              style={{ background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)', boxShadow: '0 4px 20px rgba(99,102,241,0.35)' }}
             >
-              <FaDownload /> Download Resume
+              <FaDownload className="text-xs" /> Download Resume PDF
             </a>
           </motion.div>
 
@@ -82,30 +90,28 @@ export default function About() {
             {personalInfo.stats.map((stat, i) => (
               <motion.div
                 key={i}
-                className="relative overflow-hidden rounded-2xl px-8 py-6 cursor-default transition-all duration-300 hover:border-indigo-500/40 stat-card"
-                style={{ background: 'rgba(15,23,42,0.6)', border: '1px solid rgba(99,102,241,0.15)', backdropFilter: 'blur(10px)' }}
-                whileHover={{ y: -6, scale: 1.02 }}
+                className="relative overflow-hidden rounded-2xl px-7 py-6 cursor-default transition-all duration-300 bg-slate-900/60 border border-slate-800 backdrop-blur-xl hover:border-indigo-500/40 hover:shadow-[0_0_20px_rgba(99,102,241,0.2)]"
+                whileHover={{ y: -5, scale: 1.02 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
-                <h3 className="font-heading font-extrabold text-5xl text-gradient-stat mb-1 leading-none">
+                <h3 className="font-heading font-extrabold text-4xl md:text-5xl text-gradient-stat mb-1 leading-none">
                   <AnimatedNumber target={stat.value} />+
                 </h3>
-                <p className="text-slate-500 text-sm font-medium">{stat.label}</p>
+                <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider">{stat.label}</p>
                 <div className="absolute inset-0 pointer-events-none"
-                  style={{ background: 'radial-gradient(circle at 80% 50%, rgba(99,102,241,0.07) 0%, transparent 70%)' }} />
+                  style={{ background: 'radial-gradient(circle at 80% 50%, rgba(99,102,241,0.08) 0%, transparent 70%)' }} />
               </motion.div>
             ))}
 
             {/* Open to work card */}
             <motion.div
-              className="flex items-center gap-4 rounded-2xl px-6 py-4 cursor-default transition-all duration-300 hover:bg-emerald-500/10 avail-card"
-              style={{ background: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.2)' }}
-              whileHover={{ y: -4 }}
+              className="flex items-center gap-4 rounded-2xl px-6 py-4 cursor-default transition-all duration-300 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/15"
+              whileHover={{ y: -3 }}
             >
-              <span className="w-3 h-3 rounded-full shrink-0 bg-emerald-500 animate-glow-pulse"></span>
+              <span className="w-3 h-3 rounded-full shrink-0 bg-emerald-400 animate-glow-pulse"></span>
               <div>
-                <p className="text-emerald-400 text-sm font-semibold mb-0.5">Open to Work</p>
-                <p className="text-slate-500 text-xs">Available for internships & freelance</p>
+                <p className="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-0.5">Status: Open to Opportunities</p>
+                <p className="text-slate-400 text-xs">Available for software engineering internships</p>
               </div>
             </motion.div>
           </motion.div>
