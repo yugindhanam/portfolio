@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   BASE LAYER — Global resets & body styles
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: linear-gradient(160deg, #060614 0%, #020617 50%, #080818 100%);
+    background-attachment: fixed;
+    color: #e2e8f0;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: rgba(99, 102, 241, 0.35);
+    color: #e2e8f0;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #020617; }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #8b5cf6, #ec4899);
+  }
+
+  /* Section divider top line */
+  section + section::before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 60%;
+    margin: 0 auto;
+    background: linear-gradient(90deg, transparent, rgba(99,102,241,0.2), transparent);
+  }
+}
+
+/* ============================================================
+   COMPONENTS LAYER
+   ============================================================ */
+@layer components {
+
+  /* ----------------------------------------------------------
+     SOCIAL ICON BUTTONS — used in Hero & Contact
+     ---------------------------------------------------------- */
+  .social-icon-btn {
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+  }
+
+  .social-icon-btn:hover {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+    border-color: transparent !important;
+  }
+
+  /* ----------------------------------------------------------
+     FLOATING LABEL FIELDS (Contact form)
+     ---------------------------------------------------------- */
+  .field-group {
+    @apply relative;
+  }
+
+  .field-group input,
+  .field-group textarea {
+    @apply w-full bg-slate-900/60 border border-slate-700/70 rounded-xl font-sans text-slate-200 outline-none transition-colors duration-300 resize-y block;
+    padding: 1.2rem 1rem 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .field-group input:focus,
+  .field-group textarea:focus {
+    @apply border-indigo-500;
+  }
+
+  /* Label — default: vertically centered (for inputs) */
+  .field-group label {
+    @apply absolute left-4 text-slate-500 pointer-events-none transition-all duration-300;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+  }
+
+  /* Label for textarea — start near top */
+  .field-group textarea ~ label {
+    top: 1.2rem;
+    transform: none;
+  }
+
+  /* Float label up — input focused or has value */
+  .field-group input:focus ~ label,
+  .field-group.has-value input ~ label {
+    top: 0.4rem;
+    transform: none;
+    font-size: 0.72rem;
+    color: #6366f1;
+    font-weight: 600;
+  }
+
+  /* Float label up — textarea focused or has value */
+  .field-group textarea:focus ~ label,
+  .field-group.has-value textarea ~ label {
+    top: 0.4rem;
+    font-size: 0.72rem;
+    color: #6366f1;
+    font-weight: 600;
+  }
+
+  /* Focus glow element inside field-group */
+  .field-glow {
+    position: absolute;
+    inset: -1px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    filter: blur(8px);
+  }
+
+  .field-group input:focus ~ .field-glow,
+  .field-group textarea:focus ~ .field-glow {
+    opacity: 0.15;
+  }
+
+  /* ----------------------------------------------------------
+     NAV LINK UNDERLINE (Navbar)
+     ---------------------------------------------------------- */
+  .nav-link-underline {
+    @apply absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 rounded-full transition-all duration-300;
+    background: linear-gradient(90deg, #6366f1, #ec4899);
+  }
+
+  .nav-link:hover .nav-link-underline,
+  .nav-link.active .nav-link-underline {
+    width: 70%;
+  }
+
+  /* ----------------------------------------------------------
+     GRADIENT TEXT UTILITIES
+     ---------------------------------------------------------- */
+  .text-gradient-primary {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-hero {
+    background: linear-gradient(135deg, #e2e8f0 0%, #6366f1 50%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-about {
+    background: linear-gradient(135deg, #e2e8f0, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-skills {
+    background: linear-gradient(135deg, #e2e8f0, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-projects {
+    background: linear-gradient(135deg, #e2e8f0, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-experience {
+    background: linear-gradient(135deg, #e2e8f0, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-contact {
+    background: linear-gradient(135deg, #e2e8f0, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-stat {
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
