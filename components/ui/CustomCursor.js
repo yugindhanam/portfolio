@@ -29,7 +29,8 @@ export default function CustomCursor() {
         target.tagName === 'TEXTAREA' ||
         target.closest('a') ||
         target.closest('button') ||
-        target.classList.contains('cursor-pointer')
+        target.classList.contains('cursor-pointer') ||
+        target.closest('.group')
       ) {
         setIsHovered(true)
       } else {
@@ -58,29 +59,32 @@ export default function CustomCursor() {
 
   return (
     <div className="hidden lg:block pointer-events-none fixed inset-0 z-[9999]">
-      {/* Inner Glowing Cursor Dot */}
+      {/* Core Glowing Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-3 h-3 rounded-full bg-indigo-400 shadow-[0_0_12px_#818cf8]"
+        className="fixed top-0 left-0 w-3.5 h-3.5 rounded-full bg-cyan-400 shadow-[0_0_15px_#38bdf8]"
         animate={{
-          x: mousePosition.x - 6,
-          y: mousePosition.y - 6,
-          scale: isClicked ? 0.6 : isHovered ? 1.8 : 1,
-          backgroundColor: isHovered ? '#38bdf8' : '#818cf8',
+          x: mousePosition.x - 7,
+          y: mousePosition.y - 7,
+          scale: isClicked ? 0.5 : isHovered ? 0.4 : 1,
+          backgroundColor: isHovered ? '#6366f1' : '#38bdf8',
         }}
-        transition={{ type: 'spring', stiffness: 800, damping: 35, mass: 0.1 }}
+        transition={{ type: 'spring', stiffness: 1000, damping: 35, mass: 0.1 }}
       />
 
-      {/* Outer Trailing Ring */}
+      {/* Futuristic Expanding Magnetic Aura Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-9 h-9 rounded-full border border-indigo-400/40 bg-indigo-500/10 backdrop-blur-[1px]"
+        className="fixed top-0 left-0 w-10 h-10 rounded-full border-2 border-indigo-400/50 bg-indigo-500/10 backdrop-blur-[2px]"
         animate={{
-          x: mousePosition.x - 18,
-          y: mousePosition.y - 18,
-          scale: isClicked ? 0.8 : isHovered ? 1.6 : 1,
-          borderColor: isHovered ? 'rgba(56, 189, 248, 0.7)' : 'rgba(129, 140, 248, 0.4)',
-          backgroundColor: isHovered ? 'rgba(56, 189, 248, 0.15)' : 'rgba(99, 102, 241, 0.08)',
+          x: mousePosition.x - 20,
+          y: mousePosition.y - 20,
+          scale: isClicked ? 0.7 : isHovered ? 2.2 : 1,
+          borderColor: isHovered ? 'rgba(56, 189, 248, 0.8)' : 'rgba(99, 102, 241, 0.4)',
+          backgroundColor: isHovered ? 'rgba(56, 189, 248, 0.18)' : 'rgba(99, 102, 241, 0.08)',
+          boxShadow: isHovered
+            ? '0 0 30px rgba(56, 189, 248, 0.5), inset 0 0 15px rgba(56, 189, 248, 0.3)'
+            : '0 0 15px rgba(99, 102, 241, 0.2)',
         }}
-        transition={{ type: 'spring', stiffness: 350, damping: 25, mass: 0.2 }}
+        transition={{ type: 'spring', stiffness: 450, damping: 25, mass: 0.15 }}
       />
     </div>
   )

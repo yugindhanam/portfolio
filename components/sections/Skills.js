@@ -12,11 +12,17 @@ export default function Skills() {
     : skillGroups.filter((g) => g.type === activeFilter)
 
   return (
-    <section id="skills" className="py-28 px-6 md:px-8 relative">
+    <section id="skills" className="py-28 px-6 md:px-8 relative [perspective:1000px]">
       <div className="max-w-5xl mx-auto">
 
         {/* Section header */}
-        <motion.div className="text-center mb-12" initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, scale: 0.7, y: -30 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+          viewport={{ once: true, margin: '-100px' }}
+        >
           <span className="inline-block text-xs font-semibold uppercase tracking-widest text-purple-400 px-4 py-1.5 rounded-full mb-3 bg-purple-500/10 border border-purple-500/30">
             Skills &amp; Expertise
           </span>
@@ -25,7 +31,7 @@ export default function Skills() {
           </h2>
         </motion.div>
 
-        {/* Interactive Category Filter Tabs */}
+        {/* Interactive Filter Tabs */}
         <div className="flex justify-center gap-2 md:gap-3 mb-12 flex-wrap">
           {[
             { id: 'all', label: 'All Skills' },
@@ -37,7 +43,7 @@ export default function Skills() {
               onClick={() => setActiveFilter(tab.id)}
               className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeFilter === tab.id
-                  ? 'bg-indigo-600 text-white shadow-[0_0_20px_rgba(99,102,241,0.5)] border border-indigo-400'
+                  ? 'bg-indigo-600 text-white shadow-[0_0_20px_rgba(99,102,241,0.5)] border border-indigo-400 scale-105'
                   : 'bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700'
               }`}
             >
@@ -48,14 +54,16 @@ export default function Skills() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
 
-          {/* Skill group cards */}
+          {/* Skill group cards — Aggressive 3D Fly-In */}
           {filteredGroups.map((group, idx) => (
             <motion.div
               key={group.category}
-              className="rounded-2xl p-6 md:p-8 transition-all duration-300 bg-slate-900/60 border border-slate-800 backdrop-blur-xl shadow-pro-card hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1, duration: 0.5 }}
+              className="rounded-2xl p-6 md:p-8 transition-all duration-300 bg-slate-900/70 border border-slate-800 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.3)]"
+              initial={{ opacity: 0, scale: 0.5, y: 100, rotateY: idx % 2 === 0 ? 25 : -25 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0, rotateY: 0 }}
+              transition={{ type: 'spring', stiffness: 220, damping: 18, delay: idx * 0.1 }}
+              viewport={{ once: true, margin: '-80px' }}
+              whileHover={{ scale: 1.02, y: -4 }}
             >
               <h3 className="flex items-center gap-3 font-heading font-bold text-white text-base md:text-lg mb-6 pb-3 border-b border-slate-800">
                 <span className="text-xl">{group.icon}</span> {group.category}
@@ -80,7 +88,6 @@ export default function Skills() {
                         transition={{ duration: 1.2, delay: i * 0.1, ease: 'easeOut' }}
                         viewport={{ once: true }}
                       >
-                        {/* Shimmer */}
                         <div className="absolute top-0 w-[60%] h-full animate-shimmer"
                           style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)' }} />
                       </motion.div>
@@ -93,11 +100,12 @@ export default function Skills() {
 
           {/* Tools & Certifications Card */}
           <motion.div
-            className="sm:col-span-2 rounded-2xl p-6 md:p-8 transition-all duration-300 bg-slate-900/60 border border-slate-800 backdrop-blur-xl shadow-pro-card hover:border-cyan-500/40"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            viewport={{ once: true }}
+            className="sm:col-span-2 rounded-2xl p-6 md:p-8 transition-all duration-300 bg-slate-900/70 border border-slate-800 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+            initial={{ opacity: 0, scale: 0.5, y: 100 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 220, damping: 18, delay: 0.2 }}
+            viewport={{ once: true, margin: '-80px' }}
+            whileHover={{ scale: 1.01 }}
           >
             <h3 className="flex items-center gap-3 font-heading font-bold text-white text-base md:text-lg mb-6 pb-3 border-b border-slate-800">
               <span className="text-xl">🛠️</span> Tools &amp; Specializations
@@ -106,13 +114,12 @@ export default function Skills() {
               {tools.map((tool, i) => (
                 <motion.span
                   key={i}
-                  className="px-4 py-2 rounded-full text-xs font-medium text-purple-300 cursor-default transition-all duration-300 hover:scale-105 hover:text-white hover:border-purple-400 hover:bg-purple-500/20"
+                  className="px-4 py-2 rounded-full text-xs font-medium text-purple-300 cursor-default transition-all duration-300 hover:scale-110 hover:text-white hover:border-purple-400 hover:bg-purple-500/20 hover:shadow-[0_0_15px_rgba(168,85,247,0.4)]"
                   style={{ border: '1px solid rgba(139,92,246,0.25)', background: 'rgba(139,92,246,0.08)' }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.04 }}
+                  initial={{ opacity: 0, scale: 0.4, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20, delay: i * 0.04 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -2 }}
                 >
                   {tool}
                 </motion.span>

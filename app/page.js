@@ -6,12 +6,16 @@ import Experience from '@/components/sections/Experience'
 import Contact from '@/components/sections/Contact'
 import CustomCursor from '@/components/ui/CustomCursor'
 import AmbientBackground from '@/components/ui/AmbientBackground'
+import ScrollProgressBar from '@/components/ui/ScrollProgressBar'
+import ScrollToTop from '@/components/ui/ScrollToTop'
 
 export default function Home() {
   return (
     <main className="relative min-h-screen">
+      <ScrollProgressBar />
       <CustomCursor />
       <AmbientBackground />
+      <ScrollToTop />
       <div className="relative z-10">
         <Hero />
         <About />

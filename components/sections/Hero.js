@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaChevronDown, FaDownload, FaArrowRight } from 'react-icons/fa'
 import { personalInfo } from '@/lib/data'
+import LiveTerminal from '@/components/ui/LiveTerminal'
 
 export default function Hero() {
   const [displayText, setDisplayText] = useState('')
@@ -83,7 +84,7 @@ export default function Hero() {
   ]
 
   return (
-    <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center px-6 md:px-8 pt-32 pb-20 relative overflow-hidden">
+    <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center px-6 md:px-8 pt-32 pb-24 relative overflow-hidden">
       {/* Particle Canvas */}
       <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none" />
 
@@ -95,7 +96,7 @@ export default function Hero() {
 
       {/* Hero Content */}
       <motion.div
-        className="relative z-10 max-w-3xl"
+        className="relative z-10 max-w-3xl w-full"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9 }}
@@ -150,14 +151,14 @@ export default function Hero() {
         </motion.p>
 
         {/* Typewriter */}
-        <div className="text-indigo-400 font-semibold text-xl md:text-2xl min-h-[2.5rem] mb-8 font-heading tracking-wide">
+        <div className="text-indigo-400 font-semibold text-xl md:text-2xl min-h-[2.5rem] mb-6 font-heading tracking-wide">
           {displayText}
           <span className="ml-1 inline-block text-cyan-400 animate-blink">|</span>
         </div>
 
         {/* CTA Buttons */}
         <motion.div
-          className="flex flex-wrap gap-4 justify-center mb-10"
+          className="flex flex-wrap gap-4 justify-center mb-8"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
@@ -190,7 +191,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Social Icons */}
-        <motion.div className="flex gap-3.5 justify-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+        <motion.div className="flex gap-3.5 justify-center mb-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
           {socials.map(({ icon: Icon, href, label }) => (
             <a
               key={label}
@@ -208,12 +209,15 @@ export default function Hero() {
             </a>
           ))}
         </motion.div>
+
+        {/* Live Code Terminal Widget */}
+        <LiveTerminal />
       </motion.div>
 
       {/* Scroll indicator */}
       <motion.a
         href="#about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-slate-500 text-xs font-medium no-underline hover:text-indigo-400 transition-colors z-10"
+        className="mt-6 flex flex-col items-center gap-1.5 text-slate-500 text-xs font-medium no-underline hover:text-indigo-400 transition-colors z-10"
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >

@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter, FaCopy, FaCheck } from 'react-icons/fa'
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter, FaCopy, FaCheck, FaSpinner } from 'react-icons/fa'
 import { personalInfo } from '@/lib/data'
+import { supabase } from '@/lib/supabaseClient'
 
 const contactItems = [
   { icon: FaEnvelope, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}`, type: 'email' },
@@ -18,7 +19,9 @@ const socials = [
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
+  const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
   const [focused, setFocused] = useState(null)
   const [copiedField, setCopiedField] = useState(null)
 
@@ -30,21 +33,52 @@ export default function Contact() {
     setTimeout(() => setCopiedField(null), 2000)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => {
-      setForm({ name: '', email: '', subject: '', message: '' })
-      setSubmitted(false)
-    }, 3000)
+    setLoading(true)
+    setErrorMsg('')
+
+    try {
+      // If Supabase credentials are environments variables
+      if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://your-project-ref.supabase.co') {
+        const { error } = await supabase.from('contact_messages').insert([
+          {
+            name: form.name,
+            email: form.email,
+            subject: form.subject,
+            message: form.message,
+            created_at: new Date().toISOString(),
+          },
+        ])
+
+        if (error) throw error
+      }
+
+      setSubmitted(true)
+      setTimeout(() => {
+        setForm({ name: '', email: '', subject: '', message: '' })
+        setSubmitted(false)
+      }, 4000)
+    } catch (err) {
+      console.error('Supabase submission error:', err)
+      setErrorMsg('Failed to store message. Please check your Supabase connection.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <section id="contact" className="py-28 px-6 md:px-8 relative">
+    <section id="contact" className="py-28 px-6 md:px-8 relative [perspective:1000px]">
       <div className="max-w-5xl mx-auto">
 
         {/* Section header */}
-        <motion.div className="text-center mb-16" initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, scale: 0.7, y: -30 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+          viewport={{ once: true, margin: '-100px' }}
+        >
           <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400 px-4 py-1.5 rounded-full mb-3 bg-cyan-500/10 border border-cyan-500/30">
             Get In Touch
           </span>
@@ -57,20 +91,26 @@ export default function Contact() {
         <div className="grid md:grid-cols-[1fr_1.4fr] gap-10 items-start">
 
           {/* Info panel */}
-          <motion.div className="flex flex-col gap-8" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.2, duration: 0.8 }} viewport={{ once: true }}>
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 backdrop-blur-xl shadow-pro-card">
+          <motion.div
+            className="flex flex-col gap-8"
+            initial={{ opacity: 0, scale: 0.5, y: 100, rotateX: 15 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+            transition={{ type: 'spring', stiffness: 220, damping: 18, delay: 0.1 }}
+            viewport={{ once: true, margin: '-80px' }}
+          >
+            <div className="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
               <p className="text-slate-300 text-sm leading-relaxed font-normal">
                 I am actively seeking software engineering internships, web development opportunities, and freelance projects. Feel free to contact me directly!
               </p>
             </div>
 
-            {/* Interactive Contact Cards with Copy Button */}
+            {/* Contact Cards with Copy Button */}
             <div className="flex flex-col gap-4">
               {contactItems.map(({ icon: Icon, label, value, href, type }) => (
                 <motion.div
                   key={label}
-                  className="flex items-center justify-between p-4 rounded-xl bg-slate-900/60 border border-slate-800 backdrop-blur-xl transition-all duration-300 hover:border-indigo-500/40 hover:shadow-[0_0_15px_rgba(99,102,241,0.2)] group"
-                  whileHover={{ x: 4 }}
+                  className="flex items-center justify-between p-4 rounded-xl bg-slate-900/70 border border-slate-800 backdrop-blur-xl transition-all duration-300 hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] group"
+                  whileHover={{ scale: 1.02, x: 4 }}
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-11 h-11 rounded-xl flex items-center justify-center text-indigo-400 text-base shrink-0 bg-indigo-500/10 border border-indigo-500/25">
@@ -104,7 +144,7 @@ export default function Contact() {
             <div className="flex gap-3">
               {socials.map(({ icon: Icon, href, label }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} title={label}
-                  className="w-11 h-11 rounded-xl flex items-center justify-center text-indigo-400 no-underline transition-all duration-300 hover:-translate-y-1 hover:text-white hover:shadow-[0_0_20px_rgba(99,102,241,0.5)]"
+                  className="w-11 h-11 rounded-xl flex items-center justify-center text-indigo-400 no-underline transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:shadow-[0_0_25px_rgba(99,102,241,0.6)]"
                   style={{ background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.25)' }}
                   onMouseEnter={(e) => e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1, #8b5cf6)'}
                   onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(99,102,241,0.08)'}
@@ -117,12 +157,12 @@ export default function Contact() {
 
           {/* Form */}
           <motion.form
-            className="flex flex-col gap-6 p-7 md:p-8 rounded-2xl bg-slate-900/60 border border-slate-800 backdrop-blur-xl shadow-pro-card"
+            className="flex flex-col gap-6 p-7 md:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:border-cyan-500/40"
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, scale: 0.5, y: 100, rotateX: -15 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+            transition={{ type: 'spring', stiffness: 220, damping: 18, delay: 0.2 }}
+            viewport={{ once: true, margin: '-80px' }}
           >
             {['name', 'email', 'subject'].map((field) => (
               <div
@@ -162,11 +202,15 @@ export default function Contact() {
               <div className="field-glow"></div>
             </div>
 
+            {errorMsg && (
+              <p className="text-xs text-rose-400 font-medium">{errorMsg}</p>
+            )}
+
             <motion.button
               type="submit"
-              disabled={submitted}
-              className={`w-full py-4 rounded-full font-semibold text-white border-none cursor-pointer transition-all duration-300 text-sm tracking-wide ${
-                submitted ? 'cursor-not-allowed' : 'hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(99,102,241,0.5)]'
+              disabled={loading || submitted}
+              className={`w-full py-4 rounded-full font-semibold text-white border-none cursor-pointer transition-all duration-300 text-sm tracking-wide flex items-center justify-center gap-2 ${
+                submitted || loading ? 'cursor-not-allowed' : 'hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)]'
               }`}
               style={{
                 background: submitted
@@ -178,7 +222,15 @@ export default function Contact() {
               }}
               whileTap={{ scale: 0.97 }}
             >
-              {submitted ? '✓ Message Sent Successfully!' : 'Send Message'}
+              {loading ? (
+                <>
+                  <FaSpinner className="animate-spin" /> Storing Message...
+                </>
+              ) : submitted ? (
+                '✓ Message Stored in Supabase!'
+              ) : (
+                'Send Message'
+              )}
             </motion.button>
           </motion.form>
         </div>
