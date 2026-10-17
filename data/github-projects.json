@@ -1,0 +1,213 @@
+[
+  {
+    "id": "MeshGuard",
+    "title": "MeshGuard — Network Simulator",
+    "category": "systems",
+    "artLabel": "NETWORK / RECOVER",
+    "description": "An interactive mesh network simulator that demonstrates shortest-path routing, link and router failures, and automated recovery.",
+    "tags": ["Python", "Streamlit", "NetworkX", "PyVis"],
+    "details": [
+      "Models an eight-router network with weighted links and Dijkstra routing.",
+      "Simulates packet delivery and failures with automatic path recomputation.",
+      "Visualizes network health, recovery timing, and event logs."
+    ],
+    "github": "https://github.com/yugindhanam/MeshGuard",
+    "live": null,
+    "sources": ["https://github.com/yugindhanam/MeshGuard/blob/main/README.md"]
+  },
+  {
+    "id": "motion_forge",
+    "title": "MotionForge — Gesture Playground",
+    "category": "game",
+    "artLabel": "MOTION / PLAY",
+    "description": "A browser-based hackathon prototype that uses webcam hand tracking to move virtual objects, complete motor-practice missions, and display interaction feedback.",
+    "tags": ["React", "JavaScript", "Vite", "MediaPipe"],
+    "details": [
+      "Calibrates hand tracking and uses pinch gestures to grab and place objects.",
+      "Includes catch, reach, sequence, and transfer games alongside mission-based levels.",
+      "Built in the Bug Eaters team hackathon context; presented as an interaction prototype."
+    ],
+    "github": "https://github.com/yugindhanam/motion_forge",
+    "live": "https://motionforge-pearl.vercel.app",
+    "sources": [
+      "https://github.com/yugindhanam/motion_forge/blob/main/README.md",
+      "https://github.com/yugindhanam/motion_forge/blob/main/package.json"
+    ]
+  },
+  {
+    "id": "aram_yoga",
+    "title": "Aram Yoga Studio",
+    "category": "web",
+    "artLabel": "WELLNESS / DISCOVER",
+    "description": "A yoga studio website presenting classes, instructors, pricing, and a pose library through a responsive Next.js interface.",
+    "tags": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    "details": [
+      "Presents class schedules, studio amenities, and instructor information.",
+      "Includes booking and yoga quiz interfaces.",
+      "Organizes pose guidance, pricing, frequently asked questions, and a media gallery."
+    ],
+    "github": "https://github.com/yugindhanam/aram_yoga",
+    "live": "https://aram-yoga.vercel.app",
+    "sources": [
+      "https://github.com/yugindhanam/aram_yoga/blob/main/package.json",
+      "https://github.com/yugindhanam/aram_yoga/blob/main/components/data/studioData.ts"
+    ]
+  },
+  {
+    "id": "CAD_image_assignement",
+    "title": "Cloud Image Storage",
+    "category": "ai",
+    "artLabel": "CLOUD / STORE",
+    "description": "A full-stack image gallery with a React interface, an Express API, and Amazon S3 storage for uploading, viewing, and deleting images.",
+    "tags": ["React", "Node.js", "Express", "Amazon S3"],
+    "details": [
+      "Validates image types and limits uploads to 5 MB.",
+      "Lists stored images using temporary signed S3 URLs.",
+      "Supports image deletion and displays upload and request feedback."
+    ],
+    "github": "https://github.com/yugindhanam/CAD_image_assignement",
+    "live": null,
+    "sources": [
+      "https://github.com/yugindhanam/CAD_image_assignement/blob/main/backend/server.js",
+      "https://github.com/yugindhanam/CAD_image_assignement/blob/main/backend/package.json",
+      "https://github.com/yugindhanam/CAD_image_assignement/blob/main/frontend/src/App.jsx"
+    ]
+  },
+  {
+    "id": "cloud-application",
+    "title": "TaskFlow — Cloud To-Do",
+    "category": "ai",
+    "artLabel": "TASKS / SYNC",
+    "description": "A cloud-connected task dashboard with an AWS API Gateway endpoint and a Cognito sign-in integration.",
+    "tags": ["JavaScript", "HTML", "CSS", "AWS API Gateway", "Amazon Cognito"],
+    "details": [
+      "Connects the task interface to a cloud-hosted to-do API.",
+      "Displays task and completion counts with request feedback.",
+      "Handles sign-in redirects and displays the signed-in user."
+    ],
+    "github": "https://github.com/yugindhanam/cloud-application",
+    "live": null,
+    "sources": [
+      "https://github.com/yugindhanam/cloud-application/blob/main/index.html",
+      "https://github.com/yugindhanam/cloud-application/blob/main/app.js"
+    ]
+  },
+  {
+    "id": "web_mini",
+    "title": "ShopNow — Product Catalog",
+    "category": "web",
+    "artLabel": "SHOP / EXPLORE",
+    "description": "A React shopping interface with product search, category filters, pagination, and an interactive cart.",
+    "tags": ["React", "JavaScript", "CSS"],
+    "details": [
+      "Combines product-name search with category filtering.",
+      "Paginates the catalog with six products per page.",
+      "Adds and removes cart items, calculates totals, and displays action notifications."
+    ],
+    "github": "https://github.com/yugindhanam/web_mini",
+    "live": null,
+    "sources": [
+      "https://github.com/yugindhanam/web_mini/blob/main/src/App.js",
+      "https://github.com/yugindhanam/web_mini/blob/main/src/ProductList.js",
+      "https://github.com/yugindhanam/web_mini/blob/main/src/Cart.js",
+      "https://github.com/yugindhanam/web_mini/blob/main/package.json"
+    ]
+  },
+  {
+    "id": "swiggy_clone",
+    "title": "Swiggy Clone & Web UI",
+    "category": "web",
+    "artLabel": "ORDER / EXPERIENCE",
+    "description": "A React recreation of a food-delivery browsing interface with food categories, restaurant cards, and reusable page components.",
+    "tags": ["React", "JavaScript", "CSS"],
+    "details": [
+      "Composes the page from navigation, hero, category, restaurant-list, and footer components.",
+      "Separates restaurant and category content into dedicated data modules.",
+      "Available as a public Vercel demo."
+    ],
+    "github": "https://github.com/yugindhanam/swiggy_clone",
+    "live": "https://swiggy-clone-neon.vercel.app",
+    "sources": [
+      "https://github.com/yugindhanam/swiggy_clone/blob/main/src/App.js",
+      "https://github.com/yugindhanam/swiggy_clone/blob/main/package.json"
+    ]
+  },
+  {
+    "id": "dbms-mini-project",
+    "title": "EMart — Inventory Management",
+    "category": "systems",
+    "artLabel": "INVENTORY / MANAGE",
+    "description": "An inventory management mini-project with an Oracle database, Flask endpoints, and a Tkinter desktop interface.",
+    "tags": ["Python", "Flask", "Oracle Database", "Tkinter"],
+    "details": [
+      "Adds, lists, and deletes inventory products.",
+      "Provides API routes for stock quantities, suppliers, and orders.",
+      "Includes a desktop product form and inventory table."
+    ],
+    "github": "https://github.com/yugindhanam/dbms-mini-project",
+    "live": null,
+    "sources": [
+      "https://github.com/yugindhanam/dbms-mini-project/blob/main/README.md",
+      "https://github.com/yugindhanam/dbms-mini-project/blob/main/inventory_gui_advanced.py",
+      "https://github.com/yugindhanam/dbms-mini-project/blob/main/python%20flask.py"
+    ]
+  },
+  {
+    "id": "smart_timetable_genration",
+    "title": "Smart Timetable Generator",
+    "category": "web",
+    "artLabel": "SCHEDULE / PLAN",
+    "description": "A PHP and MySQL college scheduling project that allocates subjects across a five-day, eight-period timetable.",
+    "tags": ["PHP", "MySQL", "HTML", "CSS"],
+    "details": [
+      "Validates the weekly period total and reserves a mentoring slot.",
+      "Prioritizes consecutive lab blocks before allocating theory periods.",
+      "Checks available periods, daily subject repetition, and faculty assignments."
+    ],
+    "github": "https://github.com/yugindhanam/smart_timetable_genration",
+    "live": null,
+    "sources": [
+      "https://github.com/yugindhanam/smart_timetable_genration/blob/main/README.md",
+      "https://github.com/yugindhanam/smart_timetable_genration/blob/main/generate.php"
+    ]
+  },
+  {
+    "id": "value-addes-course",
+    "title": "Python & NLP Coursework",
+    "category": "research",
+    "artLabel": "LANGUAGE / LEARN",
+    "description": "A collection of Jupyter exercises covering Python fundamentals, regular expressions, PDF reading, and natural language processing.",
+    "tags": ["Python", "Jupyter Notebook", "spaCy", "Regular Expressions"],
+    "details": [
+      "Explores tokenization and sentence segmentation with spaCy.",
+      "Inspects part-of-speech tags and dependency labels.",
+      "Includes separate notebooks for regular expressions, PDF reading, and Python basics."
+    ],
+    "github": "https://github.com/yugindhanam/value-addes-course",
+    "live": null,
+    "sources": [
+      "https://github.com/yugindhanam/value-addes-course/blob/main/README.md",
+      "https://github.com/yugindhanam/value-addes-course/blob/main/day%201(spacy).ipynb"
+    ]
+  },
+  {
+    "id": "portfolio",
+    "title": "Personal Developer Portfolio",
+    "category": "web",
+    "artLabel": "IDENTITY / BUILD",
+    "description": "A Next.js portfolio presenting projects, technical skills, education, and contact information through a responsive interface.",
+    "tags": ["Next.js", "React", "Tailwind CSS", "Supabase"],
+    "details": [
+      "Organizes personal information and projects in reusable sections.",
+      "Includes résumé download and social profile links.",
+      "Provides a contact form with a Supabase integration."
+    ],
+    "github": "https://github.com/yugindhanam/portfolio",
+    "live": null,
+    "sources": [
+      "https://github.com/yugindhanam/portfolio/blob/main/README.md",
+      "https://github.com/yugindhanam/portfolio/blob/main/package.json",
+      "https://github.com/yugindhanam/portfolio/blob/main/lib/data.js"
+    ]
+  }
+]
